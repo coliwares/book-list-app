@@ -12,6 +12,7 @@ export class CartComponent implements OnInit {
   public listCartBook: Book[] = [];
   public totalPrice = 0;
   public Math = Math;
+  public message = '';
 
   constructor(
     private readonly _bookService: BookService
@@ -41,7 +42,9 @@ export class CartComponent implements OnInit {
     if (this.listCartBook && this.listCartBook.length > 0) {
       this._clearListCartBook();
     } else {
-       console.log("No books available");
+      this.message = "No books available"
+       console.log(this.message);
+
     }
   }
 
