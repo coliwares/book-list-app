@@ -49,7 +49,7 @@ describe('CartComponent', () => {
     let component: CartComponent; //componente a testear
     let fixture: ComponentFixture<CartComponent>; //se utiliza para extraer elementos del componente
     // refactorizacion de service
-    //    let service: BookService;
+    let service: BookService;
 
     //beforeEach se ejecuta antes de cada test unitario
     beforeEach(waitForAsync(() => {
@@ -71,10 +71,9 @@ describe('CartComponent', () => {
         //Instancia del test
         fixture = TestBed.createComponent(CartComponent);
         component = fixture.componentInstance;
+        service = fixture.debugElement.injector.get(BookService);
+        spyOn(service, 'getBooksFromCart').and.callFake(() => listBook);
         fixture.detectChanges(); // activa el componente por el OnInit
-        //  explicar al final tambien se puede refactorizar como constante global el service
-        //        service = fixture.debugElement.injector.get(BookService);
-        //        spyOn(service,'getBooksFromCart').and.callFake(() => listBook);
     });
 
     //Test Unitarios
@@ -112,7 +111,6 @@ describe('CartComponent', () => {
             price: 10,
             amount: 2
         };
-        const service = fixture.debugElement.injector.get(BookService);
 
         //        llama al metodo eso es incorrecto
         //        const spyService = spyOn(service,'updateAmountBook'));
@@ -138,7 +136,6 @@ describe('CartComponent', () => {
             price: 10,
             amount: 2
         };
-        const service = fixture.debugElement.injector.get(BookService);
 
         //        llama al metodo eso es incorrecto
         //        const spyService = spyOn(service,'updateAmountBook'));
@@ -172,8 +169,6 @@ describe('CartComponent', () => {
 
     //como se prueban los metodos privados se acceden por el metodo publico
     it('should clear list cart book correctly', () => {
-        const service = fixture.debugElement.injector.get(BookService);
-
         const spyComponent = spyOn((component as any), '_clearListCartBook').and.callThrough();
         const spyService = spyOn(service, 'removeBooksFromCart').and.callFake(() => null);
         component.listCartBook = listBook;
