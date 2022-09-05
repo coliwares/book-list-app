@@ -20,3 +20,10 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+## Install JSON server
+
+Run `npm i json-server` to install
+
+## Start JSON server
+
+Run server with `json-server --watch db.json`  Now if you go to http://localhost:3000/book see get list
